@@ -1,0 +1,26 @@
+name: config
+
+on: [pull_request, push]
+
+jobs:
+  lint:
+    name: Linting with ESLint
+    runs-on: ubuntu-latest
+    steps:
+      - name: step one
+        uses: actions/checkout@v2
+        run: npm intall
+
+      - name: step two
+
+  test:
+    name: Running tests with jest
+
+  build:
+    name: Building typescript code to javascript
+
+  deploy:
+    name: Deploying server to heroko
+
+  notify:
+    name: Sending success or failure notification to slack

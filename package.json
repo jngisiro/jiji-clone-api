@@ -1,0 +1,53 @@
+{
+  "name": "jiji-clone-api",
+  "version": "1.0.0",
+  "description": "A node/express rest api built using typescript to offer web services for the Angular jiji clone application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node dist/server.js",
+    "build": "tsc",
+    "dev:build": "tsc -w",
+    "dev:run": "nodemon dist/server.js",
+    "dev": "concurrently npm:dev:*",
+    "test": "jest",
+    "lint": "eslint src/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jngisiro/jiji-clone-api.git"
+  },
+  "keywords": [
+    "jiji",
+    "angular",
+    "typescript",
+    "node",
+    "express",
+    "rest"
+  ],
+  "author": "Paul Ngisiro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jngisiro/jiji-clone-api/issues"
+  },
+  "homepage": "https://github.com/jngisiro/jiji-clone-api#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.11",
+    "@typescript-eslint/eslint-plugin": "^4.15.1",
+    "@typescript-eslint/parser": "^4.15.1",
+    "concurrently": "^5.3.0",
+    "eslint": "^7.20.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "jest": "^26.6.3",
+    "nodemon": "^2.0.7",
+    "ts-jest": "^26.5.1",
+    "typescript": "^4.1.5"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.11.17",
+    "winston": "^3.3.3"
+  }
+}
