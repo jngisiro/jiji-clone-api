@@ -1,14 +1,14 @@
-import express from 'express';
+import { app, routes } from './app';
 import * as http from 'http';
+import { CommonRoutesConfig } from './common/common.routes.config';
 
-const app: express.Application = express();
 const server: http.Server = http.createServer(app);
 const PORT = 3000;
 
-app.get('/', (req: express.Request, res: express.Response) => {
-  res.status(200).send('API Route');
-});
-
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+
+  routes.forEach((route: CommonRoutesConfig) => {
+    console.log(`Routes configured for ${route.getName()}`);
+  });
 });

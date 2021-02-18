@@ -1,26 +1,72 @@
-name: config
+# name: config
 
-on: [pull_request, push]
+# on: [pull_request, push]
+
+# jobs:
+#   lint:
+#     name: Linting with ESLint
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: checkout
+#         uses: actions/checkout@v2
+
+#       - name: install dependencies
+#         run: npm install
+
+#   test:
+#     name: Running tests with jest
+
+#   build:
+#     name: Building typescript code to javascript
+
+#   deploy:
+#     name: Deploying server to heroko
+
+#   notify:
+#     name: Sending success or failure notification to slack
+
+# on:
+#   pull_request:
+#     branches:
+#       - main
+#       - dev
+
+#   merge:
+#     branches:
+#       - main
+#       - dev
+
+name: challenge
+
+on: push
 
 jobs:
-  lint:
-    name: Linting with ESLint
+  print-date1:
+    name: print date
     runs-on: ubuntu-latest
     steps:
-      - name: step one
-        uses: actions/checkout@v2
-        run: npm intall
+      - name: print date one
+        run: echo date
 
-      - name: step two
+  print-date2:
+    name: print date
+    runs-on: windows-latest
+    steps:
+      - name: print date 2
+        run: echo date
 
-  test:
-    name: Running tests with jest
+  print-date3:
+    name: print date
+    runs-on: macos-latest
+    steps:
+      - name: print date 3
+        run: echo date
 
-  build:
-    name: Building typescript code to javascript
+  print-date4:
+    name: print date
+    runs-on: ubuntu-latest
+    needs: [print-date1, print-date2, print-date3]
+    steps:
+      - name: print date 4
+      run: echo date
 
-  deploy:
-    name: Deploying server to heroko
-
-  notify:
-    name: Sending success or failure notification to slack

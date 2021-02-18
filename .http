@@ -1,0 +1,27 @@
+GET http://localhost:3000/users/1
+
+###
+
+GET http://localhost:3000/users
+
+###
+
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "email": "userone@test.com",
+  "password": "pasword123"
+}
+
+###
+
+PUT http://localhost:3000/users/23
+
+###
+
+PATCH  http://localhost:3000/users/23
+
+###
+
+DELETE http://localhost:3000/users/23
