@@ -15,8 +15,7 @@ export class GenericInMemoryDao {
   }
 
   addUser(user: any) {
-    console.log(user);
-    return this.users.push(user);
+    return this.users.push({ id: this.users.length + 1, ...this.users });
   }
 
   getUsers() {

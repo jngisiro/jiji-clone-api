@@ -40,4 +40,8 @@ export class UsersService implements CRUD {
   updateById(resourceId: any) {
     return this.dao.putUserById(resourceId);
   }
+
+  getByEmail(email: string) {
+    return null;
+  }
 }
