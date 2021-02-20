@@ -1,6 +1,6 @@
 name: API Test Build and Notify
 
-on: [push, pull_request, merge]
+on: [push, pull_request]
 
 jobs:
   build:
