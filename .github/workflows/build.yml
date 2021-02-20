@@ -4,31 +4,30 @@ on: [push, pull_request]
 
 jobs:
   build:
+    runs-on: ubuntu-latest
 
-  runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
 
-  strategy:
-    matrix:
-      node-version: [14.x]
+    steps:
+      - uses: actions/checkout@v2
 
-  steps:
-    - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - run: npm run build
+      - run: npm run test
+        env:
+          CI: true
 
-    - run: npm install
-    - run: npm run build
-    - run: npm run test
-      env:
-        CI: true
-
-    - name: Github Action for Slack
-      if: success()
-      env:
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-      uses: Ilshidur/action-slack@1.6.2
-      with:
-        args: 'A new version of your Node.js app has been built'
+      - name: Github Action for Slack
+        if: success()
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        uses: Ilshidur/action-slack@1.6.2
+        with:
+          args: 'A new version of your Node.js app has been built'
