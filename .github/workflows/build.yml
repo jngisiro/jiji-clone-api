@@ -1,72 +1,34 @@
-# name: config
+name: API Test Build and Notify
 
-# on: [pull_request, push]
-
-# jobs:
-#   lint:
-#     name: Linting with ESLint
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: checkout
-#         uses: actions/checkout@v2
-
-#       - name: install dependencies
-#         run: npm install
-
-#   test:
-#     name: Running tests with jest
-
-#   build:
-#     name: Building typescript code to javascript
-
-#   deploy:
-#     name: Deploying server to heroko
-
-#   notify:
-#     name: Sending success or failure notification to slack
-
-# on:
-#   pull_request:
-#     branches:
-#       - main
-#       - dev
-
-#   merge:
-#     branches:
-#       - main
-#       - dev
-
-name: challenge
-
-on: push
+on: [push, pull_request, merge]
 
 jobs:
-  print-date1:
-    name: print date
-    runs-on: ubuntu-latest
-    steps:
-      - name: print date one
-        run: echo date
+  build:
 
-  print-date2:
-    name: print date
-    runs-on: windows-latest
-    steps:
-      - name: print date 2
-        run: echo date
+  runs-on: ubuntu-latest
 
-  print-date3:
-    name: print date
-    runs-on: macos-latest
-    steps:
-      - name: print date 3
-        run: echo date
+  strategy:
+    matrix:
+      node-version: [14.x]
 
-  print-date4:
-    name: print date
-    runs-on: ubuntu-latest
-    needs: [print-date1, print-date2, print-date3]
-    steps:
-      - name: print date 4
-      run: echo date
+  steps:
+    - uses: actions/checkout@v2
 
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - run: npm install
+    - run: npm run build
+    - run: npm run test
+      env:
+        CI: true
+
+    - name: Github Action for Slack
+      if: success()
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      uses: Ilshidur/action-slack@1.6.2
+      with:
+        args: 'A new version of your Node.js app has been built'
