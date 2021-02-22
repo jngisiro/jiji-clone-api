@@ -12,4 +12,3 @@ tests
 jest.config.js
 LICENSE
 README.md
-tsconfig.json
