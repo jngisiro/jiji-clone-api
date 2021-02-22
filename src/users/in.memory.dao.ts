@@ -1,9 +1,11 @@
+type userObj = { id: string; email: string; password: string };
+
 export class GenericInMemoryDao {
   private static instance: GenericInMemoryDao;
-  users: any[] = [];
+  users: userObj[] = [];
 
   constructor() {
-    console.log('Created new instance of GenericInMemoryDao');
+    // console.log('Created new instance of GenericInMemoryDao');
   }
 
   static getInstance(): GenericInMemoryDao {
@@ -14,17 +16,15 @@ export class GenericInMemoryDao {
     return GenericInMemoryDao.instance;
   }
 
-  addUser(user: any) {
-    return this.users.push({ id: this.users.length + 1, ...this.users });
+  addUser(user: userObj) {
+    return this.users.push({ ...user, id: 1 + this.users.length + '' }) + '';
   }
 
   getUsers() {
-    console.log(this.users);
     return this.users;
   }
 
   getUserById(userId: string) {
-    console.log('running');
     return this.users.find((user: { id: string }) => userId === user.id);
   }
 
@@ -43,16 +43,16 @@ export class GenericInMemoryDao {
     return `${user.id} updated via put`;
   }
 
-  patchUserById(user: any) {
+  patchUserById(userid: string) {
     const objIndex = this.users.findIndex(
-      (obj: { id: any }) => obj.id === user.id
+      (obj: { id: any }) => obj.id === userid
     );
 
     let currentUser = this.users[objIndex];
 
-    for (let i in user) {
+    for (let i in this.users) {
       if (i !== 'id') {
-        currentUser[i] = user[i];
+        currentUser[i] = this.users[i];
       }
     }
 
@@ -62,7 +62,7 @@ export class GenericInMemoryDao {
       ...this.users.slice(objIndex + 1),
     ];
 
-    return `${user.id} patched`;
+    return `${userid} patched`;
   }
 
   removeUserById(userId: string) {
@@ -70,7 +70,7 @@ export class GenericInMemoryDao {
       (obj: { id: any }) => obj.id === userId
     );
 
-    this.users = this.users.splice(objIndex, 1);
+    this.users.splice(objIndex, 1);
     return `${userId} removed`;
   }
 }
