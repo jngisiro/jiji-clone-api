@@ -18,7 +18,7 @@ COPY . .
 ### Typescript Build
 RUN npm run build
 
-WORKDIR /dist
+RUN npm start
 
 EXPOSE 8080
 CMD [ "node", "server.js" ]
