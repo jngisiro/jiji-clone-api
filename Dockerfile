@@ -18,6 +18,5 @@ COPY . .
 ### Typescript Build
 RUN npm run build
 
-RUN npm start
-
 EXPOSE 8080
+CMD [ "npm", "start" ]
