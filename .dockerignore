@@ -1,0 +1,15 @@
+dist
+node_modules
+tests
+
+.github
+.editorconfig
+.eslintrc.yml
+.gitignore
+.http
+.prettierrc
+
+jest.config.js
+LICENSE
+README.md
+tsconfig.json
