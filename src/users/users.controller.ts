@@ -11,8 +11,7 @@ export class UsersController {
 
   getUserById(req: Request, res: Response) {
     const userService = UsersService.getInstance();
-    console.log(req.params);
-    const user = userService.readById(req.params.id);
+    const user = userService.readById(req.params.userId);
 
     res.status(200).send(user);
   }
@@ -40,7 +39,7 @@ export class UsersController {
 
   removeUser(req: Request, res: Response) {
     const userService = UsersService.getInstance();
-    userService.deleteById(req.params.id);
+    userService.deleteById(req.params.userId);
 
     res.status(204).send('');
   }

@@ -16,12 +16,21 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3000/users/23
+PUT http://localhost:3000/users/1
+
+{
+  "email": "jp@email.com",
+  "password": "newpass"
+}
 
 ###
 
-PATCH  http://localhost:3000/users/23
+PATCH  http://localhost:3000/users/1
+
+{
+  "description": "new new description"
+}
 
 ###
 
-DELETE http://localhost:3000/users/23
+DELETE http://localhost:3000/users/1
